@@ -4,20 +4,35 @@ import Link from "next/link";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Index() {
-  const { data, error } = useSwr("/api/users", fetcher);
+  const { data: products, error } = useSwr("/api/stocks", fetcher);
 
   if (error) return <div>Failed to load users</div>;
-  if (!data) return <div>Loading...</div>;
+  if (!products) return <div>Loading...</div>;
+  // console.log(data);
 
   return (
-    <ul>
-      {data.map((user) => (
-        <li key={user.id}>
-          <Link href="/users/[id]" as={`/users/${user.id}`}>
-            <a>{`User ${user.id}`}</a>
-          </Link>
-        </li>
+    <table style={{ textAlign: "left" }}>
+      <h2>Babs Stocks</h2>
+      <tr>
+        <th>Product</th>
+        <th>SKU</th>
+        <th>Stock</th>
+      </tr>
+      {products.map((product) => (
+        <tr>
+          <td>
+            <p style={{ margin: "4px", marginRight: "32px" }}>{product.name}</p>
+          </td>
+          <td>
+            <p style={{ margin: "4px", marginRight: "32px" }}> {product.sku}</p>
+          </td>
+          <td>
+            <p style={{ margin: "4px", marginRight: "32px" }}>
+              {product.stock}
+            </p>
+          </td>
+        </tr>
       ))}
-    </ul>
+    </table>
   );
 }
