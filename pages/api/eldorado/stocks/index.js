@@ -1,5 +1,5 @@
 // Fetch
-import { getStockLevel } from "../../../src/fetch/stock";
+import { getStockLevel } from "../../../../src/fetch/eldoraro/stocks";
 
 // Fake users data
 const products = [

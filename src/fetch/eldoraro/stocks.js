@@ -3,10 +3,10 @@ import { fetch } from "./index";
 import { js2xml } from "xml-js";
 
 export async function getStockLevel(sku) {
-  const url = process.env.STOCK_LEVEL_URL;
+  const url = process.env.ELDORADO_STOCK_URL;
 
   const payload = {
-    key: process.env.STORE_KEY,
+    key: process.env.ELDORADO_STORE_KEY,
     item: sku,
   };
 

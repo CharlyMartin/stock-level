@@ -1,7 +1,6 @@
 // Packages
 import isomorphicFetch from "isomorphic-fetch";
 import { xml2js } from "xml-js";
-// import Cookies from "js-cookie";
 
 async function formatXMLData(response) {
   const { status, statusText } = response;
@@ -11,7 +10,7 @@ async function formatXMLData(response) {
   return resp;
 }
 
-export async function fetch(url, options) {
+export async function fetch(url, options = {}) {
   const defaults = {
     headers: {
       "Content-Type": "application/xml",
