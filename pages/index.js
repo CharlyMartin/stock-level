@@ -7,16 +7,27 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Index() {
   const { data } = useSwr("/api/shopify/products", fetcher);
+  const { data: test } = useSwr("/api/stocks", fetcher);
   const { data: stocks, error } = useSwr("/api/eldorado/stocks", fetcher);
 
   if (error) return <div>Failed to load stock levels</div>;
   if (!stocks || !data) return <div>Loading...</div>;
 
-  const skus = data.products
-    .filter((product) => product.variants.length)
-    .filter((product) => product.variants.find((v) => v.sku));
+  console.log(test);
 
-  console.log(skus);
+  // const skus = data.products
+  //   .filter((product) => product.variants.length)
+  //   .map((product) => {
+  //     const { title, image, variants } = product;
+  //     return { name: title, image, variants };
+  //   })
+  //   .map((product) => {
+  //     const { variants } = product;
+  //     const skus = variants.map((v) => ({ sku: v.sku, title: v.option1 }));
+  //     return { ...product, variants: skus };
+  //   });
+
+  // console.log(skus);
 
   return (
     <div>

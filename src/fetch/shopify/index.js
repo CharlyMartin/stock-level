@@ -22,7 +22,6 @@ export async function fetch(resource, options = {}) {
   };
   const fullOptions = { ...defaults, ...options };
   const url = buildApiUrl(resource);
-  console.log(url);
 
   return isomorphicFetch(url, fullOptions).then(formatResponse);
 }
