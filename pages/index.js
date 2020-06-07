@@ -1,58 +1,49 @@
+// Packages
 import useSwr from "swr";
-// import Link from "next/link";
 
-import { extractSkus } from "../src/utils/extract-skus";
-
+// Fetch
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Index() {
-  const { data } = useSwr("/api/shopify/products", fetcher);
-  const { data: test } = useSwr("/api/stocks", fetcher);
-  const { data: stocks, error } = useSwr("/api/eldorado/stocks", fetcher);
+  const { error, data } = useSwr("/api/stocks", fetcher);
 
-  if (error) return <div>Failed to load stock levels</div>;
-  if (!stocks || !data) return <div>Loading...</div>;
+  if (error) {
+    console.log(error);
+    return <div>Failed to load stock levels</div>;
+  }
 
-  console.log(test);
+  if (!data) return <div>Loading...</div>;
 
-  // const skus = data.products
-  //   .filter((product) => product.variants.length)
-  //   .map((product) => {
-  //     const { title, image, variants } = product;
-  //     return { name: title, image, variants };
-  //   })
-  //   .map((product) => {
-  //     const { variants } = product;
-  //     const skus = variants.map((v) => ({ sku: v.sku, title: v.option1 }));
-  //     return { ...product, variants: skus };
-  //   });
-
-  // console.log(skus);
+  const style = { margin: "4px 64px 4px 0" };
 
   return (
-    <div>
+    <div style={{ padding: "16px 64px" }}>
       <table style={{ textAlign: "left" }}>
-        <h2>Babs Stocks</h2>
+        <h2>Babs Products: {data.count}</h2>
         <tr>
           <th>Product</th>
+          <th>Variant</th>
           <th>SKU</th>
           <th>Stock</th>
         </tr>
-        {stocks.map((product) => (
+        {data.products.map((product) => (
           <tr>
             <td>
-              <p style={{ margin: "4px", marginRight: "32px" }}>
-                {product.name}
-              </p>
+              <p style={style}> {product.productTitle}</p>
             </td>
             <td>
-              <p style={{ margin: "4px", marginRight: "32px" }}>
-                {" "}
-                {product.sku}
-              </p>
+              <p style={style}> {product.variantTitle}</p>
             </td>
             <td>
-              <p style={{ margin: "4px", marginRight: "32px" }}>
+              <p style={style}> {product.sku}</p>
+            </td>
+            <td>
+              <p
+                style={{
+                  ...style,
+                  color: Number(product.stock) > 5 ? "green" : "red",
+                }}
+              >
                 {product.stock}
               </p>
             </td>
@@ -60,7 +51,7 @@ export default function Index() {
         ))}
       </table>
       <i>
-        <p>BJ Count: 3</p>
+        <p>BJ Count: 20</p>
       </i>
     </div>
   );
