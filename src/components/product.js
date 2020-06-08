@@ -1,40 +1,20 @@
 // Packages
 import React from "react";
-import useSwr from "swr";
+import { Flex, Text, Spinner, Badge } from "@chakra-ui/core";
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+// Component
+import ProductStock from "./product-stock";
 
 export default function Product(props) {
-  const { data } = props;
+  const { data, position } = props;
   const { productTitle, variantTitle, sku } = data;
 
-  const { error, data: skuInfo } = useSwr("/api/stocks/" + sku, fetcher);
-
-  if (error) return <p>Error</p>;
-  if (!skuInfo) return <div>?</div>;
-
-  const style = { margin: "4px 64px 4px 0" };
   return (
-    <tr>
-      <td>
-        <p style={style}>{productTitle}</p>
-      </td>
-      <td>
-        <p style={style}>{variantTitle}</p>
-      </td>
-      <td>
-        <p style={style}>{sku}</p>
-      </td>
-      <td>
-        <p
-          style={{
-            ...style,
-            color: Number(skuInfo.stock) > 5 ? "green" : "red",
-          }}
-        >
-          {skuInfo.stock}
-        </p>
-      </td>
-    </tr>
+    <Flex p={2} align="center" bg={position % 2 ? "unset" : "white"}>
+      <Text flex="0 1 50%">{productTitle}</Text>
+      <Text flex="0 1 20%">{variantTitle}</Text>
+      <Text flex="0 1 20%">{sku}</Text>
+      <ProductStock sku={sku} />
+    </Flex>
   );
 }

@@ -1,36 +1,29 @@
 // Packages
 import useSwr from "swr";
+import { Box } from "@chakra-ui/core";
 
 // Components
-import Product from "../src/components/product";
+import ProductList from "../src/components/product-list";
+import Header from "../src/components/header";
+import Theme from "../src/components/theme";
 
 // Fetch
 import { fetcher } from "../src/fetch";
 
-export default function Index() {
-  const { error, data } = useSwr("/api/products", fetcher);
-
-  if (error) return <div>Failed to load stock levels</div>;
-
-  if (!data) return <div>Loading...</div>;
+function Index() {
+  const { error, data } = useSwr("/api/products/count", fetcher);
+  console.log(data);
 
   return (
-    <div style={{ padding: "16px 64px" }}>
-      <table style={{ textAlign: "left" }}>
-        <h2>The stock of Babs</h2>
-        <tr>
-          <th>Product</th>
-          <th>Variant</th>
-          <th>SKU</th>
-          <th>Stock</th>
-        </tr>
-        {data.map((product) => (
-          <Product data={product} />
-        ))}
-      </table>
-      <i>
-        <p>BJ Count: 20</p>
-      </i>
-    </div>
+    <Box width={[1280]} mx="auto" style={{ position: "relative" }}>
+      <Header />
+      <ProductList />
+    </Box>
   );
 }
+
+export default (props) => (
+  <Theme>
+    <Index {...props} />
+  </Theme>
+);
