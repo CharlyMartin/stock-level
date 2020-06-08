@@ -7,6 +7,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "emotion-theming": "^10.0.27",
     "isomorphic-fetch": "^2.2.1",
     "next": "latest",
     "parse-headers": "^2.0.3",

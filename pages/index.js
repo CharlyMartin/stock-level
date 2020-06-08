@@ -5,7 +5,7 @@ import useSwr from "swr";
 import Product from "../src/components/product";
 
 // Fetch
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { fetcher } from "../src/fetch";
 
 export default function Index() {
   const { error, data } = useSwr("/api/products", fetcher);

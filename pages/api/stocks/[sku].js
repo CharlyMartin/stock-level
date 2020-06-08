@@ -1,4 +1,4 @@
-import { getStockLevel } from "../../../src/fetch/eldoraro/stocks";
+import { getStockLevel } from "../../../src/fetch/eldorado";
 
 export default async function handler(req, res) {
   const { query } = req;

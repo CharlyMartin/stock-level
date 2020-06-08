@@ -1,6 +1,7 @@
-// Fetch
-import { fetch } from "./index";
+// Packages
 import { js2xml } from "xml-js";
+
+import { fetchXML } from "./index";
 
 export async function getStockLevel(sku) {
   const url = process.env.ELDORADO_STOCK_URL;
@@ -10,7 +11,7 @@ export async function getStockLevel(sku) {
     item: sku,
   };
 
-  return await fetch(url, {
+  return await fetchXML(url, {
     method: "POST",
     body: js2xml(payload, { compact: true }),
   });
