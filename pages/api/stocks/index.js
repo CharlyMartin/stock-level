@@ -1,6 +1,6 @@
 // Fetch
 import { getStockLevel } from "../../../src/fetch/eldorado";
-import { fetchJSON } from "../../../src/fetch/shopify";
+import { fetchJSON } from "../../../src/fetch";
 
 export default async function handler(req, res) {
   const { meta, data: products } = await fetchJSON(
