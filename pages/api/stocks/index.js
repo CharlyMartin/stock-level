@@ -1,9 +1,9 @@
 // Fetch
 import { getStockLevel } from "../../../src/fetch/eldorado";
-import { fetch } from "../../../src/fetch/shopify";
+import { fetchJSON } from "../../../src/fetch/shopify";
 
 export default async function handler(req, res) {
-  const { meta, data: products } = await fetch(
+  const { meta, data: products } = await fetchJSON(
     process.env.APP_URL + "/api/products"
   );
 
