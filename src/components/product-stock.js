@@ -10,8 +10,10 @@ import { delay } from "../utils/delay";
 
 export default function ProductStock({ sku, position = 0, ...rest }) {
   const url = "/api/stocks/" + sku;
-  const { error, data } = useSwr(url, (url) =>
-    delay(url, position * 500).then(fetcher)
+  const { error, data } = useSwr(
+    url,
+    (url) => delay(url, position * 500).then(fetcher),
+    { revalidateOnMount: false, revalidateOnFocus: false }
   );
 
   if (error || !data) return <Spinner size="xs" color="pink.500" />;
