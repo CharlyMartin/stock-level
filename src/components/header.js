@@ -1,5 +1,6 @@
 // Packages
-import { Heading, Flex, Box } from "@chakra-ui/core";
+import { useState } from "react";
+import { Heading, Flex, Box, Input, Button, Stack } from "@chakra-ui/core";
 import styled from "@emotion/styled";
 
 // Components
@@ -17,13 +18,36 @@ const ListHeading = ({ children, size }) => (
   </Heading>
 );
 
-export default function Header() {
+export default function Header({ products, setSearch }) {
+  const [value, setValue] = useState("");
+  const handleChange = (event) => setValue(event.target.value);
+  const handleSearch = () => setSearch(value);
+  const handleReset = () => {
+    setSearch("");
+    setValue("");
+  };
+
   return (
     <StickyHeader as="header" bg="pink.50" pt={8}>
       <Heading as="h1" size="2xl" color="pink.900">
         The Stock of Babs
       </Heading>
-      <ProductCount />
+      <Flex justify="space-between" align="center">
+        <ProductCount skuCount={products.length} />
+        <Stack isInline>
+          <Input
+            width={200}
+            focusBorderColor="pink.200"
+            placeholder="Womanizer"
+            border="md"
+            onChange={handleChange}
+          />
+          <Button variantColor="pink" onClick={handleSearch}>
+            Search
+          </Button>
+          <Button onClick={handleReset}>Reset</Button>
+        </Stack>
+      </Flex>
       <Flex pb={2} pt={8} borderBottomColor="pink.900" borderBottomWidth={1}>
         <ListHeading size="50%">Products</ListHeading>
         <ListHeading size="20%">Variant</ListHeading>

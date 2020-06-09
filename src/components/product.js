@@ -1,6 +1,6 @@
 // Packages
 import React from "react";
-import { Flex, Text, Spinner, Badge } from "@chakra-ui/core";
+import { Flex, Text } from "@chakra-ui/core";
 
 // Component
 import ProductStock from "./product-stock";
@@ -14,7 +14,7 @@ export default function Product(props) {
       <Text flex="0 1 50%">{productTitle}</Text>
       <Text flex="0 1 20%">{variantTitle}</Text>
       <Text flex="0 1 20%">{sku}</Text>
-      <ProductStock sku={sku} />
+      <ProductStock sku={sku} position={position} />
     </Flex>
   );
 }

@@ -5,8 +5,15 @@ import { Spinner, Badge } from "@chakra-ui/core";
 // Fetch
 import { fetcher } from "../fetch";
 
-export default function Product({ sku, ...rest }) {
-  const { error, data } = useSwr("/api/stocks/" + sku, fetcher);
+// Utils
+import { delay } from "../utils/delay";
+
+export default function ProductStock({ sku, position = 0, ...rest }) {
+  const url = "/api/stocks/" + sku;
+  const { error, data } = useSwr(url, (url) =>
+    delay(url, position * 200).then(fetcher)
+  );
+
   if (error || !data) return <Spinner size="xs" color="pink.500" />;
 
   const styles = {
