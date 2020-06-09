@@ -12,7 +12,10 @@ import Theme from "../src/components/theme";
 import { fetcher } from "../src/fetch";
 
 function Index() {
-  const { error, data } = useSwr("/api/products", fetcher);
+  const { error, data } = useSwr("/api/products", fetcher, {
+    revalidateOnMount: false,
+    revalidateOnFocus: false,
+  });
   const [search, setSearch] = useState("");
 
   if (error) return <Text>Failed to load stock levels</Text>;
