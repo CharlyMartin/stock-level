@@ -23,3 +23,21 @@ export async function getProductVariantCount() {
   const url = buildApiUrl("/variants/count.json");
   return fetchJSON(url);
 }
+
+export async function getLocations() {
+  const url = buildApiUrl("/locations.json");
+  return fetchJSON(url);
+}
+
+export async function setInventoryLevel(payload) {
+  const url = buildApiUrl("/inventory_levels/set.json");
+  // {
+  //   "location_id": 905684977,
+  //   "inventory_item_id": 808950810,
+  //   "available": 42
+  // }
+  return fetchJSON(url, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
