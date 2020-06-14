@@ -9,6 +9,10 @@ export async function getProducts() {
   return fetchJSON(url);
 }
 
+export async function getAllProducts() {
+  return fetchJSON(process.env.APP_URL + "/api/products");
+}
+
 export async function getProductCount() {
   const url = buildApiUrl("/products/count.json");
   return fetchJSON(url);

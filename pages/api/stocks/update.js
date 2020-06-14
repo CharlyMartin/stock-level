@@ -1,19 +1,20 @@
 // Fetch
 import { getStockLevel } from "../../../src/fetch/eldorado";
-import { getLocations, setInventoryLevel } from "../../../src/fetch/shopify";
-import { fetchJSON } from "../../../src/fetch";
-// import { postSlackMessage } from "../../../src/fetch/slack";
+import {
+  getLocations,
+  setInventoryLevel,
+  getAllProducts,
+} from "../../../src/fetch/shopify";
+// import { fetchJSON } from "../../../src/fetch";
+import { postSlackMessage } from "../../../src/fetch/slack";
 
 export default async function handler(req, res) {
-  const { data: products } = await fetchJSON(
-    new URL("/api/products", process.env.APP_URL)
-  );
-
+  const { data: products } = await getAllProducts();
   const { data: locations } = await getLocations();
   const locationId = locations.locations[0].id;
 
   let count = 0;
-  // postSlackMessage({ title: "Update Starts", text: "Update Starts" });
+  postSlackMessage({ title: "Update Starts", text: "Update Starts" });
 
   for (const product of products) {
     const { sku, inventoryId } = product;
