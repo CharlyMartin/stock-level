@@ -8,15 +8,14 @@ import { fetcher } from "../fetch";
 // Utils
 import { delay } from "../utils/delay";
 
-export default function ProductStock({ sku, position = 0, ...rest }) {
-  const url = "/api/stocks/" + sku;
-  const { error, data } = useSwr(
-    url,
-    (url) => delay(url, position * 500).then(fetcher),
-    { revalidateOnMount: false, revalidateOnFocus: false }
-  );
+export default function ProductStock({ quantity, position = 0, ...rest }) {
+  // const { error, data } = useSwr(
+  //   "/api/stocks/" + sku,
+  //   (url) => delay(url, position * 500).then(fetcher),
+  //   { revalidateOnMount: false, revalidateOnFocus: false }
+  // );
 
-  if (error || !data) return <Spinner size="xs" color="pink.500" />;
+  // if (error || !data) return <Spinner size="xs" color="pink.500" />;
 
   const styles = {
     in: { bg: "green.500", color: "white", fontSize: "md" },
@@ -25,13 +24,13 @@ export default function ProductStock({ sku, position = 0, ...rest }) {
   };
 
   const getData = () => {
-    if (data.stock == "-1") return "Wrong SKU";
-    return data.stock;
+    if (quantity == -1) return "Wrong SKU";
+    return quantity;
   };
 
   const getStyle = () => {
-    if (Number(data.stock) > 1) return styles["in"];
-    if (Number(data.stock) == -1) return styles["wrong"];
+    if (Number(quantity) > 1) return styles["in"];
+    if (Number(quantity) == -1) return styles["wrong"];
     return styles["out"];
   };
 
