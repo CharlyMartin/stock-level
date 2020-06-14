@@ -11,6 +11,7 @@ import { postSlackMessage } from "../../../../src/fetch/slack";
 export default async function handler(req, res) {
   const { query } = req;
   const { id, locationId } = query;
+  let count = 0;
 
   const { data: v } = await getProductVariant(id);
   const { sku, inventory_item_id } = v.variant;
@@ -24,8 +25,9 @@ export default async function handler(req, res) {
       inventory_item_id,
       available: stockLevel,
     });
+    count++;
     postSlackMessage({
-      title: sku,
+      title: count + " - " + sku,
       text: "Stock: " + stockLevel + " -  Status: " + meta.statusText,
     });
   }

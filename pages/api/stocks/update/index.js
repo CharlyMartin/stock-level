@@ -1,11 +1,11 @@
 // Fetch
-import { getStockLevel } from "../../../src/fetch/eldorado";
+import { getStockLevel } from "../../../../src/fetch/eldorado";
 import {
   getLocations,
   setInventoryLevel,
   getApiProducts,
-} from "../../../src/fetch/shopify";
-import { postSlackMessage } from "../../../src/fetch/slack";
+} from "../../../../src/fetch/shopify";
+import { postSlackMessage } from "../../../../src/fetch/slack";
 
 export default async function handler(req, res) {
   const { data: products } = await getApiProducts();
