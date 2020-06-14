@@ -6,7 +6,7 @@ import { fetchJSON } from "../../../src/fetch";
 
 export default async function handler(req, res) {
   const { data: products } = await fetchJSON(
-    process.env.APP_URL + "/api/products"
+    new URL("/api/products", process.env.APP_URL)
   );
 
   const { data: locations } = await getLocations();
