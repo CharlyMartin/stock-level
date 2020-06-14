@@ -3,12 +3,12 @@ import { getStockLevel } from "../../../src/fetch/eldorado";
 import {
   getLocations,
   setInventoryLevel,
-  getAllProducts,
+  getApiProducts,
 } from "../../../src/fetch/shopify";
 import { postSlackMessage } from "../../../src/fetch/slack";
 
 export default async function handler(req, res) {
-  const { data: products } = await getAllProducts();
+  const { data: products } = await getApiProducts();
   const { data: locations } = await getLocations();
   const locationId = locations.locations[0].id;
 

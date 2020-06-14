@@ -9,17 +9,18 @@ export async function getProducts() {
   return fetchJSON(url);
 }
 
-export async function getAllProducts() {
-  return fetchJSON(process.env.APP_URL + "/api/products");
-}
-
 export async function getProductCount() {
   const url = buildApiUrl("/products/count.json");
   return fetchJSON(url);
 }
 
-export async function getProductVariants() {
-  const url = buildApiUrl("/variants.json?limit=250");
+export async function getProductVariants({ limit = 1, sinceId = "" }) {
+  const url = buildApiUrl(`/variants.json?limit=${limit}&since_id=${sinceId}`);
+  return fetchJSON(url);
+}
+
+export async function getProductVariant(id) {
+  const url = buildApiUrl(`/variants/${id}.json`);
   return fetchJSON(url);
 }
 
@@ -44,4 +45,15 @@ export async function setInventoryLevel(payload) {
     method: "POST",
     body: JSON.stringify(payload),
   });
+}
+
+// WRAPPER
+export async function getApiProducts() {
+  return fetchJSON(process.env.APP_URL + "/api/products");
+}
+
+export async function getApiProductVariant({ id, locationId }) {
+  return fetchJSON(
+    process.env.APP_URL + `/api/stocks/update/${id}?locationId=${locationId}`
+  );
 }
