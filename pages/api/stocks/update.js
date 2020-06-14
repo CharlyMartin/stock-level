@@ -5,7 +5,6 @@ import {
   setInventoryLevel,
   getAllProducts,
 } from "../../../src/fetch/shopify";
-// import { fetchJSON } from "../../../src/fetch";
 import { postSlackMessage } from "../../../src/fetch/slack";
 
 export default async function handler(req, res) {
