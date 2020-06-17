@@ -30,6 +30,9 @@ export default async function handler(req, res) {
           inventory_item_id: inventoryId,
           available: stockLevel,
         });
+        console.log(
+          count + " - " + sku + " - " + s.statusText + " - " + i.statusText
+        );
         // postSlackMessage({
         //   title: count + " - " + sku + " - Stock: " + stockLevel,
         //   text: "Eldoraro: " + s.statusText + " - Shopify: " + i.statusText,
