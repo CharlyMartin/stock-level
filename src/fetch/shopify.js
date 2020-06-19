@@ -1,4 +1,8 @@
+// Fetch
 import { fetchJSON } from "./index";
+
+// Config
+import { server } from "../../config";
 
 export function buildApiUrl(resource = "/products") {
   return `https://${process.env.SHOPIFY_API_KEY}:${process.env.SHOPIFY_PASSWORD}@${process.env.SHOPIFY_HOST_NAME}/admin/api/2020-04${resource}`;
@@ -49,8 +53,9 @@ export async function setInventoryLevel(payload) {
 
 // WRAPPER
 export async function getApiProducts() {
-  console.log(process.env.APP_URL);
-  return fetchJSON(process.env.APP_URL + "/api/products");
+  const url = `${server}/api/products`;
+  console.log(url);
+  return fetchJSON(url);
 }
 
 export async function getApiProductVariant({ id, locationId }) {
