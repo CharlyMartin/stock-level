@@ -23,21 +23,19 @@ export default async function handler(req, res) {
       const { meta: s, data: stock } = await getStockLevel(sku);
       const stockLevel = Number(stock.quantity.amount._text);
 
-      if (stockLevel != -1) {
-        // Update Shopify
-        const { meta: i } = await setInventoryLevel({
-          location_id: locationId,
-          inventory_item_id: inventoryId,
-          available: stockLevel,
-        });
-        console.log(
-          count + " - " + sku + " - " + s.statusText + " - " + i.statusText
-        );
-        // postSlackMessage({
-        //   title: count + " - " + sku + " - Stock: " + stockLevel,
-        //   text: "Eldoraro: " + s.statusText + " - Shopify: " + i.statusText,
-        // });
-      }
+      // Update Shopify
+      const { meta: i } = await setInventoryLevel({
+        location_id: locationId,
+        inventory_item_id: inventoryId,
+        available: stockLevel,
+      });
+      console.log(
+        count + " - " + sku + " - " + s.statusText + " - " + i.statusText
+      );
+      postSlackMessage({
+        title: count + " - " + sku + " - Stock: " + stockLevel,
+        text: "Eldoraro: " + s.statusText + " - Shopify: " + i.statusText,
+      });
     }
   }
 
