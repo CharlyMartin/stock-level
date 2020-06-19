@@ -59,7 +59,6 @@ export async function getApiProducts() {
 }
 
 export async function getApiProductVariant({ id, locationId }) {
-  return fetchJSON(
-    process.env.APP_URL + `/api/stocks/update/${id}?locationId=${locationId}`
-  );
+  const url = `${server}/api/stocks/update/${id}?locationId=${locationId}`;
+  return fetchJSON(url);
 }
