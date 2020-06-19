@@ -49,8 +49,8 @@ export async function setInventoryLevel(payload) {
 
 // WRAPPER
 export async function getApiProducts() {
-  const url = new URL("/api/products", process.env.APP_URL);
-  return fetchJSON(url);
+  console.log(process.env.APP_URL);
+  return fetchJSON(process.env.APP_URL + "/api/products");
 }
 
 export async function getApiProductVariant({ id, locationId }) {
