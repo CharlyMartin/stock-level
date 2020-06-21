@@ -3,9 +3,9 @@ import {
   getProductVariants,
   getApiProductVariant,
   getLocations,
-} from "../../../../src/fetch/shopify";
+} from "../../src/fetch/shopify";
 
-import { postSlackMessage } from "../../../../src/fetch/slack";
+import { postSlackMessage } from "../../src/fetch/slack";
 
 export default async function handler(req, res) {
   postSlackMessage({ title: "Start!", text: "Update Starts" });

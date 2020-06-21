@@ -30,7 +30,6 @@ export default function Header({ products, setSearch }) {
   const handleUpdate = () => {
     setLoading(true);
     fetcher("/api/stocks/update").then((data) => {
-      console.log(data);
       setLoading(false);
     });
   };
@@ -56,14 +55,14 @@ export default function Header({ products, setSearch }) {
           </Button>
         </Stack>
 
-        <Button
+        {/* <Button
           variantColor="teal"
           loadingText="Updating..."
           isLoading={loading}
           onClick={handleUpdate}
         >
           Update Stock Data
-        </Button>
+        </Button> */}
       </Flex>
       <Flex pb={2} pt={8} borderBottomColor="pink.900" borderBottomWidth={1}>
         <ListHeading size="5%">N</ListHeading>

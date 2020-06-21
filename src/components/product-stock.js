@@ -20,23 +20,16 @@ export default function ProductStock({ quantity, position = 0, ...rest }) {
   const styles = {
     in: { bg: "green.500", color: "white", fontSize: "md" },
     out: { bg: "red.500", color: "white", fontSize: "md" },
-    wrong: { bg: "gray.600", color: "white" },
-  };
-
-  const getData = () => {
-    if (quantity == -1) return "Wrong SKU";
-    return quantity;
   };
 
   const getStyle = () => {
     if (Number(quantity) > 1) return styles["in"];
-    if (Number(quantity) == -1) return styles["wrong"];
     return styles["out"];
   };
 
   return (
     <Badge {...rest} {...getStyle()} width="auto">
-      {getData()}
+      {quantity}
     </Badge>
   );
 }
