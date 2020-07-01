@@ -6,9 +6,6 @@ import styled from "@emotion/styled";
 // Components
 import ProductCount from "./product-count";
 
-// Fetch
-import { fetcher } from "../fetch";
-
 const StickyHeader = styled(Box)`
   position: sticky;
   top: 0;
@@ -29,7 +26,7 @@ export default function Header({ products, setSearch }) {
 
   const handleUpdate = () => {
     setLoading(true);
-    fetcher(process.env.NEXT_PUBLIC_UPDATE_STOCK).then(() => {
+    fetch(process.env.NEXT_PUBLIC_UPDATE_STOCK).then(() => {
       alert("Done");
       setLoading(false);
     });
