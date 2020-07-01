@@ -29,7 +29,8 @@ export default function Header({ products, setSearch }) {
 
   const handleUpdate = () => {
     setLoading(true);
-    fetcher("/api/stocks/update").then((data) => {
+    fetcher(process.env.NEXT_PUBLIC_UPDATE_STOCK).then(() => {
+      alert("Done");
       setLoading(false);
     });
   };
@@ -53,16 +54,16 @@ export default function Header({ products, setSearch }) {
           <Button variantColor="pink" onClick={() => setSearch(value)}>
             Search
           </Button>
+          <Button
+            ml={8}
+            variantColor="teal"
+            loadingText="Updating in style..."
+            isLoading={loading}
+            onClick={handleUpdate}
+          >
+            Update Stock Data
+          </Button>
         </Stack>
-
-        {/* <Button
-          variantColor="teal"
-          loadingText="Updating..."
-          isLoading={loading}
-          onClick={handleUpdate}
-        >
-          Update Stock Data
-        </Button> */}
       </Flex>
       <Flex pb={2} pt={8} borderBottomColor="pink.900" borderBottomWidth={1}>
         <ListHeading size="5%">N</ListHeading>
