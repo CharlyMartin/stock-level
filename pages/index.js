@@ -29,16 +29,16 @@ function Index() {
     );
   }
 
+  const { products } = data;
+
   const getData = () => {
-    if (search) {
-      return data.products.filter((p) => p.productTitle.includes(search));
-    }
-    return data.products;
+    if (search) return products.filter((p) => p.productTitle.includes(search));
+    return products;
   };
 
   return (
     <Box width={[1280]} mx="auto" style={{ position: "relative" }}>
-      <Header products={data.products} setSearch={setSearch} />
+      <Header data={data} setSearch={setSearch} />
       <ProductList products={getData()} />
     </Box>
   );

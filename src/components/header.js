@@ -18,19 +18,19 @@ const ListHeading = ({ children, size }) => (
   </Heading>
 );
 
-export default function Header({ products, setSearch }) {
+export default function Header({ data, setSearch }) {
   const [value, setValue] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => setValue(event.target.value);
 
-  const handleUpdate = () => {
-    setLoading(true);
-    fetch(process.env.NEXT_PUBLIC_UPDATE_STOCK).then(() => {
-      alert("Done");
-      setLoading(false);
-    });
-  };
+  // const handleUpdate = () => {
+  //   setLoading(true);
+  //   fetch(process.env.NEXT_PUBLIC_UPDATE_STOCK).then(() => {
+  //     alert("Done");
+  //     setLoading(false);
+  //   });
+  // };
 
   return (
     <StickyHeader as="header" bg="pink.50" pt={8}>
@@ -38,7 +38,7 @@ export default function Header({ products, setSearch }) {
         The Stock of Babs
       </Heading>
       <Flex justify="space-between" align="center">
-        <ProductCount skuCount={products.length} />
+        <ProductCount {...data} />
 
         <Stack isInline>
           <Input
@@ -51,15 +51,15 @@ export default function Header({ products, setSearch }) {
           <Button variantColor="pink" onClick={() => setSearch(value)}>
             Search
           </Button>
-          <Button
+          {/* <Button
             ml={8}
             variantColor="teal"
-            loadingText="Updating in style..."
+            loadingText="Updating"
             isLoading={loading}
             onClick={handleUpdate}
           >
             Update Stock Data
-          </Button>
+          </Button> */}
         </Stack>
       </Flex>
       <Flex pb={2} pt={8} borderBottomColor="pink.900" borderBottomWidth={1}>
